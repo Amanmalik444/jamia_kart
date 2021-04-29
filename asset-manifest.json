@@ -1,26 +1,26 @@
 {
   "files": {
-    "main.css": "/jamia_kart%20http://amanmalik444.github.io/jamia_kart/static/css/main.a74b8e4b.chunk.css",
-    "main.js": "/jamia_kart%20http://amanmalik444.github.io/jamia_kart/static/js/main.c76247dc.chunk.js",
-    "main.js.map": "/jamia_kart%20http://amanmalik444.github.io/jamia_kart/static/js/main.c76247dc.chunk.js.map",
-    "runtime-main.js": "/jamia_kart%20http://amanmalik444.github.io/jamia_kart/static/js/runtime-main.5a739a77.js",
-    "runtime-main.js.map": "/jamia_kart%20http://amanmalik444.github.io/jamia_kart/static/js/runtime-main.5a739a77.js.map",
+    "main.css": "/jamia_kart%20http://amanmalik444.github.io/jamia_kart/static/css/main.626b868d.chunk.css",
+    "main.js": "/jamia_kart%20http://amanmalik444.github.io/jamia_kart/static/js/main.56c4e396.chunk.js",
+    "main.js.map": "/jamia_kart%20http://amanmalik444.github.io/jamia_kart/static/js/main.56c4e396.chunk.js.map",
+    "runtime-main.js": "/jamia_kart%20http://amanmalik444.github.io/jamia_kart/static/js/runtime-main.e7ff91b0.js",
+    "runtime-main.js.map": "/jamia_kart%20http://amanmalik444.github.io/jamia_kart/static/js/runtime-main.e7ff91b0.js.map",
     "static/css/2.97503911.chunk.css": "/jamia_kart%20http://amanmalik444.github.io/jamia_kart/static/css/2.97503911.chunk.css",
-    "static/js/2.83d410f1.chunk.js": "/jamia_kart%20http://amanmalik444.github.io/jamia_kart/static/js/2.83d410f1.chunk.js",
-    "static/js/2.83d410f1.chunk.js.map": "/jamia_kart%20http://amanmalik444.github.io/jamia_kart/static/js/2.83d410f1.chunk.js.map",
-    "static/js/3.7c48d606.chunk.js": "/jamia_kart%20http://amanmalik444.github.io/jamia_kart/static/js/3.7c48d606.chunk.js",
-    "static/js/3.7c48d606.chunk.js.map": "/jamia_kart%20http://amanmalik444.github.io/jamia_kart/static/js/3.7c48d606.chunk.js.map",
+    "static/js/2.d967ad1c.chunk.js": "/jamia_kart%20http://amanmalik444.github.io/jamia_kart/static/js/2.d967ad1c.chunk.js",
+    "static/js/2.d967ad1c.chunk.js.map": "/jamia_kart%20http://amanmalik444.github.io/jamia_kart/static/js/2.d967ad1c.chunk.js.map",
+    "static/js/3.29e8afce.chunk.js": "/jamia_kart%20http://amanmalik444.github.io/jamia_kart/static/js/3.29e8afce.chunk.js",
+    "static/js/3.29e8afce.chunk.js.map": "/jamia_kart%20http://amanmalik444.github.io/jamia_kart/static/js/3.29e8afce.chunk.js.map",
     "index.html": "/jamia_kart%20http://amanmalik444.github.io/jamia_kart/index.html",
     "static/css/2.97503911.chunk.css.map": "/jamia_kart%20http://amanmalik444.github.io/jamia_kart/static/css/2.97503911.chunk.css.map",
-    "static/css/main.a74b8e4b.chunk.css.map": "/jamia_kart%20http://amanmalik444.github.io/jamia_kart/static/css/main.a74b8e4b.chunk.css.map",
-    "static/js/2.83d410f1.chunk.js.LICENSE.txt": "/jamia_kart%20http://amanmalik444.github.io/jamia_kart/static/js/2.83d410f1.chunk.js.LICENSE.txt",
+    "static/css/main.626b868d.chunk.css.map": "/jamia_kart%20http://amanmalik444.github.io/jamia_kart/static/css/main.626b868d.chunk.css.map",
+    "static/js/2.d967ad1c.chunk.js.LICENSE.txt": "/jamia_kart%20http://amanmalik444.github.io/jamia_kart/static/js/2.d967ad1c.chunk.js.LICENSE.txt",
     "static/media/JamiaKart.e933ad70.jpg": "/jamia_kart%20http://amanmalik444.github.io/jamia_kart/static/media/JamiaKart.e933ad70.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.5a739a77.js",
+    "static/js/runtime-main.e7ff91b0.js",
     "static/css/2.97503911.chunk.css",
-    "static/js/2.83d410f1.chunk.js",
-    "static/css/main.a74b8e4b.chunk.css",
-    "static/js/main.c76247dc.chunk.js"
+    "static/js/2.d967ad1c.chunk.js",
+    "static/css/main.626b868d.chunk.css",
+    "static/js/main.56c4e396.chunk.js"
   ]
 }
