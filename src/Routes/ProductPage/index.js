@@ -2,28 +2,43 @@ import React from "react";
 import Image from "./Components/Image.js";
 import DetailBox from "./Components/DetailBox.js";
 import RightBox from "./Components/RightBox.js";
-import NavBar from "../../Components/NavBar.js";
-import Nav2 from "../../Components/Nav2.js";
 import { useLocation } from "react-router-dom";
 
 const ProductPage = () => {
   const location = useLocation();
 
-  const { id, name, price, imgTag, category, description } = location.state;
+  const {
+    id,
+    name,
+    price,
+    imgTag,
+    category,
+    description,
+    sellerName,
+    qty,
+  } = location.state;
 
   return (
     <div
       style={{
-        position: "fixed",
-        width: "100%",
-        zIndex: "1000",
+        marginTop: "11vh",
       }}
     >
-      <NavBar />
-      <Nav2 />
       <Image imgTag={imgTag} />
-      <DetailBox name={name} price={price} description={description} />
-      <RightBox />
+      <DetailBox
+        name={name}
+        price={price}
+        description={description}
+        sellerName={sellerName}
+        qty={qty}
+      />
+      <RightBox
+        qty={qty}
+        id={id}
+        name={name}
+        price={price}
+        sellerName={sellerName}
+      />
     </div>
   );
 };

@@ -1,47 +1,69 @@
-import React from "react";
+import * as React from "react";
 import "./Card.css";
-import Button from "@material-ui/core/Button";
-import { Row, Col } from "reactstrap";
-import {useHistory} from 'react-router-dom';
+import { Col } from "reactstrap";
+import { useHistory } from "react-router-dom";
 
-const Card = ({ id, name, price, imgTag, category, description }) => {
-
+const Card = ({
+  id,
+  name,
+  price,
+  imgTag,
+  category,
+  description,
+  sellerName,
+  qty,
+}) => {
   const history = useHistory();
 
   const pageChange = () => {
-    history.push(`/product:${id}`, {id, name, price, imgTag, category, description});
+    if (JSON.parse(localStorage.getItem("user")).category === "customer")
+      history.push(`/product:${id}`, {
+        id,
+        name,
+        price,
+        imgTag,
+        category,
+        description,
+        sellerName,
+        qty,
+      });
+    else history.push("/login");
   };
 
   return (
     <Col
+      data-tip
+      data-for="registerTip"
       md="12"
-      className="d-flex justify-content-center align-items-center flex-wrap p-4 m-3 text-center border shadow container"
-      style={{ height: "450px" }}
+      id="TooltipExample"
+      className="d-flex justify-content-center align-items-center flex-wrap p-4 m-3 text-center shadow container"
+      style={{ height: "400px" }}
+      onClick={pageChange}
     >
-      <Col md="12" className="p-2">
-        <img alt="robots" src={imgTag} className="image" />
+      <Col md="12" className="imgContainer">
+        <img alt="product" src={imgTag} className="image" style={{}} />
       </Col>
       <Col
         md="12"
         className="d-flex justify-content-center align-items-between flex-wrap"
       >
-        <Col md="12" className="">
-          <h5>{name.length < 25 ? name : name.substring(0, 20) + "..."}</h5>
+        <Col md="12" className="d-flex justify-content-center flex-wrap">
+          <h6>{name.length < 25 ? name : name.substring(0, 17) + "..."}</h6>
         </Col>
-        <Col md="12" className="">
-          <h6>{category}</h6>
+        <Col md="12" className="d-flex justify-content-center flex-wrap">
+          <small>{category}</small>
         </Col>
-        <Col md="12" className="">
-          <p>Rs. {price}</p>
+        <Col md="12" className="d-flex justify-content-center flex-wrap">
+          <small>Rs. {price}</small>
         </Col>
+        {qty === 0 && (
+          <Col md="12" className="my-0 d-flex justify-content-center flex-wrap">
+            <small style={{ color: "red" }}>
+              <small>Out Of Stock</small>
+            </small>
+          </Col>
+        )}
       </Col>
-      <Button
-        onClick={pageChange}
-        variant="outlined"
-        style={{ border: "1px solid #ee8822aa", color: "#ee8822ff" }}
-      >
-        Show product
-      </Button>
     </Col>
   );
 };

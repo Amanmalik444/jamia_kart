@@ -1,12 +1,24 @@
-import React, { Component, useState } from 'react';
-import CardList from './Components/CardList';
+import * as React from "react";
+import CardList from "./Components/CardList";
 
-const RightBox = ({selectedCategory}) => {
+const RightBox = ({
+  selectedCategory,
+  stockFilter,
+  sortFilter,
+  categoryFilter,
+  searchValue,
+}) => {
   return (
-    <div style={{position: 'relative', left: '21vw'}}>
-      <CardList selectedCategory={selectedCategory}/>
+    <div style={{ position: "relative", left: "21vw" }}>
+      <CardList
+        selectedCategory={selectedCategory}
+        stockFilter={stockFilter}
+        sortFilter={sortFilter}
+        categoryFilter={categoryFilter}
+        searchValue={searchValue}
+      />
     </div>
-  )
-}
+  );
+};
 
 export default RightBox;

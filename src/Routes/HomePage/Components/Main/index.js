@@ -1,19 +1,32 @@
-import React from "react";
-import { Container, Col, Row } from "reactstrap";
-import LeftBox from './LerftBox/index.js';
+import * as React from "react";
+import LeftBox from "./LerftBox/index.js";
 import RightBox from "./RightBox/index.js";
 
-const Main = ({selectedCategory}) => {
-    return (
-        <div style={{minWidth: '1294px', overflowX: 'auto'}}>
-            <div className="w-25">
-                <LeftBox />
-            </div>
-            <div className='w-75'>
-                <RightBox selectedCategory={selectedCategory}/>
-            </div>
-        </div>
-    )
-}
+const Main = ({ searchValue }) => {
+  const [stockFilter, setStockFilter] = React.useState(false);
+  const [sortFilter, setSortFilter] = React.useState("By Name");
+  const [categoryFilter, setCategoryFilter] = React.useState("All");
 
-export default Main
+  return (
+    <div style={{ minWidth: "1000px", overflowX: "auto" }}>
+      <div className="w-25">
+        <LeftBox
+          stockFilter={stockFilter}
+          setStockFilter={setStockFilter}
+          setSortFilter={setSortFilter}
+          setCategoryFilter={setCategoryFilter}
+        />
+      </div>
+      <div className="w-75">
+        <RightBox
+          stockFilter={stockFilter}
+          sortFilter={sortFilter}
+          categoryFilter={categoryFilter}
+          searchValue={searchValue}
+        />
+      </div>
+    </div>
+  );
+};
+
+export default Main;

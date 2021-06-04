@@ -1,129 +1,88 @@
 import React from "react";
-import {
-  FormControl,
-  FormControlLabel,
-  InputLabel,
-  Chip,
-} from "@material-ui/core";
+import { FormControl, FormControlLabel, InputLabel } from "@material-ui/core";
 import Switch from "@material-ui/core/Switch";
 import { Select } from "@material-ui/core";
 import MenuItem from "@material-ui/core/MenuItem";
-import {Col} from 'reactstrap';
+import { Col } from "reactstrap";
 
-const LeftBox = () => {
-  const [state, setState] = React.useState({
-    checkedA: true,
-    checkedB: true,
-  });
-
-  const handleChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
-  };
-  const handleDelete = () => {
-    console.info("You clicked the delete icon.");
-  };
-
-  const handleClick = () => {
-    console.info("You clicked the Chip.");
-  };
-
+const LeftBox = ({
+  stockFilter,
+  setStockFilter,
+  setSortFilter,
+  setCategoryFilter,
+}) => {
   return (
     <div
       style={{
         position: "fixed",
         backgroundColor: "white",
         height: "100vh",
-        width: '20vw',
-        minWidth: '180px',
-        marginTop: "14vh",
-        paddingTop: "30px",
-        paddingBottom:"50px",
-        zIndex: '500',
-        overflowX: 'auto',
-        BorderRadius:"20px"
-    }}
-    >
-      
-    <Col md="12" data-aos="fade-right"
-      style={{
-        position: "fixed",
-        backgroundColor: "white",
-        borderRight: "1px solid rgba(0,0,0,0.3)",
-        height: "80vh",
-        width: '20vw',
-        minWidth: '180px',
-        padding: "8px",
-        zIndex: '1000',
-        overflowX: 'auto'
+        width: "20vw",
+        minWidth: "180px",
+        marginTop: "11vh",
+        zIndex: "500",
+        overflowX: "auto",
+        BorderRadius: "20px",
       }}
     >
-      <div style={{ display: "flex", flexDirection: "column" }}>
-        <FormControlLabel
-          style={{ margin: "20px" }}
-          control={
-            <Switch
-              checked={state.checkedB}
-              onChange={handleChange}
-              name="checkedB"
-              style={{ color: "black" }}
-              color="#000000"
-            />
-          }
-          label="Available products only"
-        />
-        <FormControl
-          style={{ margin: "20px", marginTop: "30px", marginBottom: "30px" }}
-        >
-          <InputLabel>Sort by</InputLabel>
+      <Col
+        md="12"
+        data-aos="fade-right"
+        style={{
+          position: "fixed",
+          backgroundColor: "white",
+          borderRight: "1px solid rgba(0,0,0,0.3)",
+          height: "87vh",
+          paddingTop: "12vh",
+          width: "20vw",
+          minWidth: "180px",
+          padding: "8px",
+          zIndex: "1000",
+          overflowX: "auto",
+        }}
+      >
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <FormControlLabel
+            style={{ margin: "20px" }}
+            control={
+              <Switch
+                checked={stockFilter}
+                onChange={() => setStockFilter(!stockFilter)}
+                name="checkedB"
+                style={{ color: "black" }}
+                color="#000000"
+              />
+            }
+            label="Available products only"
+          />
+          <FormControl
+            style={{ margin: "20px", marginTop: "30px", marginBottom: "30px" }}
+          >
+            <InputLabel>Sort by</InputLabel>
 
-          <Select>
-            <MenuItem value="">
-              <em>Featured (default)</em>
-            </MenuItem>
-            <MenuItem value={10}>Price : Low to High</MenuItem>
-            <MenuItem value={20}>Price : High to Low</MenuItem>
-            <MenuItem value={30}>Avg. Customer review</MenuItem>
-          </Select>
-        </FormControl>
-        {/* <h2
-          style={{ margin: "30px", marginBottom: "0px", textAlign: "center" }}
-        >
-          Discount
-        </h2> */}
-        <div className="d-flex justify-content center flex-wrap">
-        {/* <Chip
-          label="10% off or more"
-          onClick={handleClick}
-          onDelete={handleDelete}
-          className="d-flex justify-content-between mx-3 my-2"
-          style={{ border: "1px solid #ee8022bf", color: "#ee8022ff", backgroundColor: "#ffffff", width: '80%', fontSize: '1.1rem' }}
-        />
-        <Chip
-          label="25% off or more"
-          onClick={handleClick}
-          onDelete={handleDelete}
-          className="d-flex justify-content-between mx-3 my-2"
-          style={{ border: "1px solid #ee8022bf", color: "#ee8022ff", backgroundColor: "#ffffff", width: '80%', fontSize: '1.1rem' }}
-        />
-        <Chip
-          label="35% off or more"
-          style={{ margin: "50px", marginTop: "4px", marginBottom: "4px", width: '80%' }}
-          onClick={handleClick}
-          onDelete={handleDelete}
-          className="d-flex justify-content-between mx-3 my-2"
-          style={{ border: "1px solid #ee8022bf", color: "#ee8022ff", backgroundColor: "#ffffff", width: '80%', fontSize: '1.1rem' }}
-        />
-        <Chip
-          label="50% off or more"
-          variant="outlined"
-          onClick={handleClick}
-          onDelete={handleDelete}
-          className="d-flex justify-content-between mx-3 my-2"
-          style={{ border: "1px solid #ee8022bf", color: "#ee8022ff", backgroundColor: "#ffffff", width: '80%', fontSize: '1.1rem' }}
-        /> */}
+            <Select onChange={(event) => setSortFilter(event.target.value)}>
+              <MenuItem value={"By Name"}>By Name</MenuItem>
+              <MenuItem value={"PLTH"}>Price : Low to High</MenuItem>
+              <MenuItem value={"PHTL"}>Price : High to Low</MenuItem>
+              <MenuItem value={"By Category"}>By Category</MenuItem>
+            </Select>
+          </FormControl>
+
+          <FormControl
+            style={{ margin: "20px", marginTop: "30px", marginBottom: "30px" }}
+          >
+            <InputLabel>Category</InputLabel>
+
+            <Select onChange={(event) => setCategoryFilter(event.target.value)}>
+              <MenuItem value={"All"}>All</MenuItem>
+              <MenuItem value={"Men's Clothing"}>Men's section</MenuItem>
+              <MenuItem value={"Women's Clothing"}>Women's section</MenuItem>
+              <MenuItem value={"Jewelery"}>Jewelery</MenuItem>
+              <MenuItem value={"Electronics"}>Electronics</MenuItem>
+            </Select>
+          </FormControl>
         </div>
-      </div>
-    </Col>
+      </Col>
     </div>
   );
 };

@@ -1,26 +1,32 @@
+import * as React from "react";
 import { Container, Col, Row } from "reactstrap";
-import {
-  AvForm,
-  AvField,
-  AvGroup,
-  AvInput,
-  AvFeedback,
-  AvRadioGroup,
-  AvRadio,
-  AvCheckboxGroup,
-  AvCheckbox,
-} from "availity-reactstrap-validation";
+import { AvForm, AvField } from "availity-reactstrap-validation";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
-import { Button, Label, FormGroup, CustomInput } from "reactstrap";
+import {
+  Button,
+  Spinner,
+  FormGroup,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+} from "reactstrap";
 import JamiaKart from "../../utils/JamiaKart.jpg";
 import Nav from "./Nav";
-import {serverLink} from '../../utils/constans';
+import { serverLink } from "../../utils/constants";
+import { toast } from "react-toastify";
 const qs = require("qs");
 
 const LoginForm = () => {
   const history = useHistory();
+  const [loading, setLoading] = React.useState(false);
+  const [changePasswordLoading, setChangePasswordLoading] = React.useState(
+    false
+  );
+  const [changePasswordModal, setChangePasswordModal] = React.useState(false);
   const handleSubmit = (event, values) => {
+    setLoading(true);
     console.log(values);
     axios
       .post(
@@ -33,16 +39,49 @@ const LoginForm = () => {
       .then((res) => {
         console.log(res);
         localStorage.setItem("jwt", res.data.access_token);
-        // var decoded = jwt_decode(res.data.access_token);
-        // localStorage.setItem("user", decoded);
-        // console.log(decoded);
-        // axios.get(`${serverLink}/user/`, {
-        //   headers:{
-        //     "Authorization":"bearer "+localStorage.getItem('jwt')
-        // }
-        // }).then(res => console.log(res)).catch(err => console.log(err));
-        history.push("/jamia_kart");
-      }).catch(err => alert('Wrong username or password'));
+        axios
+          .get(`${serverLink}/user/`, {
+            headers: {
+              Authorization: "bearer " + localStorage.getItem("jwt"),
+            },
+          })
+          .then((res) => {
+            setLoading(false);
+            localStorage.setItem("user", JSON.stringify(res.data));
+            history.push(
+              res.data.category === "customer"
+                ? "/jamia_kart"
+                : "/sellerhomepage"
+            );
+            toast.dark("Logged in successfully");
+          })
+          .catch((err) => {
+            setLoading(false);
+            console.log(err);
+            toast.error("Invalid credentials");
+          });
+      })
+      .catch((err) => {
+        setLoading(false);
+        toast.error("Invalid credentials");
+      });
+  };
+
+  const handleChangePassword = (event, values) => {
+    setChangePasswordLoading(true);
+    axios
+      .put(`${serverLink}/user/pass/${values.email}`, {
+        password: values.newPassword,
+      })
+      .then((res) => {
+        setChangePasswordLoading(true);
+        setChangePasswordModal(!changePasswordModal);
+        toast.dark("Password Changed Successfully!!");
+      })
+      .catch((err) => {
+        setChangePasswordLoading(false);
+        toast.error("Trouble reaching servers");
+      });
   };
 
   return (
@@ -74,20 +113,85 @@ const LoginForm = () => {
                   />
                 </Col>
                 <FormGroup className="w-100 d-flex justify-content-center">
-                  <Button type="submit" outline color="info">
-                    Sign In
-                  </Button>
+                  {!loading ? (
+                    <Button type="submit" outline color="info">
+                      Sign In
+                    </Button>
+                  ) : (
+                    <Spinner color="info" />
+                  )}
                 </FormGroup>
                 <FormGroup className="w-100 d-flex justify-content-center align-items-center">
-              <div>Don't have an account?</div>
-              <div className="ml-3" style={{color: '#332288', textDecoration: 'underline', cursor: 'pointer'}} onClick={() => history.push('/register')}>
-                Register
-              </div>
-            </FormGroup>
+                  <small
+                    style={{
+                      color: "#332288",
+                      textDecoration: "underline",
+                      cursor: "pointer",
+                    }}
+                    onClick={() => setChangePasswordModal(!changePasswordModal)}
+                  >
+                    Forgot Password?
+                  </small>
+                </FormGroup>
+                <FormGroup className="w-100 d-flex justify-content-center align-items-center">
+                  <small>Don't have an account?</small>
+                  <small
+                    className="ml-2"
+                    style={{
+                      color: "#332288",
+                      textDecoration: "underline",
+                      cursor: "pointer",
+                    }}
+                    onClick={() => history.push("/register")}
+                  >
+                    Register
+                  </small>
+                </FormGroup>
               </Row>
             </AvForm>
           </Col>
         </Col>
+        <Modal
+          isOpen={changePasswordModal}
+          toggle={() => setChangePasswordModal(!changePasswordModal)}
+        >
+          <ModalHeader
+            toggle={() => setChangePasswordModal(!changePasswordModal)}
+          >
+            Change Password
+          </ModalHeader>
+          <AvForm onValidSubmit={handleChangePassword}>
+            <ModalBody>
+              <Col md="12">
+                <AvField name="email" label="Email" type="email" required />
+              </Col>
+              <Col md="12">
+                <AvField
+                  name="newPassword"
+                  type="password"
+                  label="New Password"
+                />
+              </Col>
+            </ModalBody>
+            <ModalFooter>
+              <Button
+                color={changePasswordLoading ? "secondary" : "info"}
+                outline
+                type="submit"
+                disabled={changePasswordLoading}
+              >
+                Change Password
+              </Button>{" "}
+              <Button
+                color="secondary"
+                outline
+                onClick={() => setChangePasswordModal(!changePasswordModal)}
+              >
+                Cancel
+              </Button>
+            </ModalFooter>
+          </AvForm>
+        </Modal>
       </div>
     </>
   );
